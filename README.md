@@ -122,15 +122,11 @@ O monitoramento em tempo real é realizado através do Node-RED Dashboard.
 
 ### Wokwi
 
-Adicionar captura da simulação do ESP32.
+![Wokwi](docs/wokwi.png)
 
 ### Dashboard
 
-Adicionar captura do dashboard em execução.
-
-### Arquitetura
-
-Adicionar imagem da arquitetura da solução.
+![Dashboard](docs/dashboard.png)
 
 ---
 
