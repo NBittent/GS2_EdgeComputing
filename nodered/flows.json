@@ -1,0 +1,900 @@
+[
+    {
+        "id": "1a41a0fc6727e1f3",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "afe02c778e48cc32",
+        "type": "mqtt in",
+        "z": "1a41a0fc6727e1f3",
+        "name": "",
+        "topic": "dragon/c214/telemetry",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "broker1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 220,
+        "wires": [
+            [
+                "c036a8d2ddc08204"
+            ]
+        ]
+    },
+    {
+        "id": "a33545b697decf96",
+        "type": "debug",
+        "z": "1a41a0fc6727e1f3",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "e188d4025902a918",
+        "type": "inject",
+        "z": "1a41a0fc6727e1f3",
+        "name": "",
+        "props": [
+            {
+                "p": "teste",
+                "v": "node-red",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "062400ea16637f59"
+            ]
+        ]
+    },
+    {
+        "id": "062400ea16637f59",
+        "type": "mqtt out",
+        "z": "1a41a0fc6727e1f3",
+        "name": "",
+        "topic": "dragon/c214/telemetry",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "broker1",
+        "x": 400,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c036a8d2ddc08204",
+        "type": "json",
+        "z": "1a41a0fc6727e1f3",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 430,
+        "y": 260,
+        "wires": [
+            [
+                "a33545b697decf96",
+                "9053fe75fdbe6acf",
+                "f5cb509bc9ed4a3e",
+                "718b177807b8c76a",
+                "f746a1044026def8",
+                "5a1924a05986e3f3",
+                "48a4e451378eb207"
+            ]
+        ]
+    },
+    {
+        "id": "9053fe75fdbe6acf",
+        "type": "function",
+        "z": "1a41a0fc6727e1f3",
+        "name": "Temperatura",
+        "func": "msg.payload = msg.payload.sensors.temperature_c;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 300,
+        "wires": [
+            [
+                "5b2fee2bc1843cd3",
+                "0601ae096b7f4434",
+                "eea3bb47302ff437"
+            ]
+        ]
+    },
+    {
+        "id": "f5cb509bc9ed4a3e",
+        "type": "function",
+        "z": "1a41a0fc6727e1f3",
+        "name": "Pressao",
+        "func": "msg.payload = msg.payload.sensors.pressure_kpa;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 420,
+        "wires": [
+            [
+                "be41e71fd733f406"
+            ]
+        ]
+    },
+    {
+        "id": "718b177807b8c76a",
+        "type": "function",
+        "z": "1a41a0fc6727e1f3",
+        "name": "Radiacao",
+        "func": "msg.payload = msg.payload.sensors.radiation_msvh;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 460,
+        "wires": [
+            [
+                "4ead5c2659f49d95",
+                "6f06a81d6dd20f03"
+            ]
+        ]
+    },
+    {
+        "id": "f746a1044026def8",
+        "type": "function",
+        "z": "1a41a0fc6727e1f3",
+        "name": "Velocidade",
+        "func": "msg.payload = msg.payload.sensors.velocity_kms;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 500,
+        "wires": [
+            [
+                "32ad493f996e963c"
+            ]
+        ]
+    },
+    {
+        "id": "0601ae096b7f4434",
+        "type": "ui-gauge",
+        "z": "1a41a0fc6727e1f3",
+        "name": "Temperatura",
+        "group": "50fb4bd02ab2c112",
+        "order": 4,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperatura",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ff0000",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "18",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "20",
+                "color": "#64ea53",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "26",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "27",
+                "color": "#ff0000",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "40",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1030,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "be41e71fd733f406",
+        "type": "ui-gauge",
+        "z": "1a41a0fc6727e1f3",
+        "name": "Pressao",
+        "group": "50fb4bd02ab2c112",
+        "order": 3,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Pressão",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "kPa",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "90",
+                "color": "#d6645c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "97",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "99",
+                "color": "#53ea78",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "103",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "105",
+                "color": "#c22222",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "90",
+        "max": "110",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 860,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4ead5c2659f49d95",
+        "type": "ui-gauge",
+        "z": "1a41a0fc6727e1f3",
+        "name": "Radiacao",
+        "group": "50fb4bd02ab2c112",
+        "order": 2,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Radiação",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "mSv/h",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "0.8",
+                "color": "#ffd500",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "1.5",
+                "color": "#ff0000",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "2",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 860,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "32ad493f996e963c",
+        "type": "ui-gauge",
+        "z": "1a41a0fc6727e1f3",
+        "name": "Velocidade",
+        "group": "50fb4bd02ab2c112",
+        "order": 1,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Velocidade Orbital",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "km/s",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "7.4",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7.5",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7.6",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7.75",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7.85",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "7.4",
+        "max": "8.0",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 870,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b2fee2bc1843cd3",
+        "type": "debug",
+        "z": "1a41a0fc6727e1f3",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "eea3bb47302ff437",
+        "type": "ui-chart",
+        "z": "1a41a0fc6727e1f3",
+        "group": "b62df3ba7447cb41",
+        "name": "Temperatura Histórica",
+        "label": "Temperatura",
+        "order": 1,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "5",
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "2",
+        "height": "4",
+        "className": "",
+        "interpolation": "linear",
+        "x": 1060,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "48d21a87f2ad3924",
+        "type": "ui-text",
+        "z": "1a41a0fc6727e1f3",
+        "group": "791902eb6cc84244",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Status da Missao",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": true,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 890,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "5a1924a05986e3f3",
+        "type": "function",
+        "z": "1a41a0fc6727e1f3",
+        "name": "statMissao",
+        "func": "let status = msg.payload.status;\n\nif (status === \"NOMINAL\") {\n    msg.payload = '<h2 style=\"color:#22C55E;\">🟢 NOMINAL</h2>';\n}\nelse if (status === \"WARNING\") {\n    msg.payload = '<h2 style=\"color:#FACC15;\">🟡 WARNING</h2>';\n}\nelse {\n    msg.payload = '<h2 style=\"color:#EF4444;\">🔴 CRITICAL</h2>';\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 560,
+        "wires": [
+            [
+                "48d21a87f2ad3924"
+            ]
+        ]
+    },
+    {
+        "id": "00f93147d282f707",
+        "type": "mqtt in",
+        "z": "1a41a0fc6727e1f3",
+        "name": "",
+        "topic": "dragon/c214/alerts",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "broker1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 640,
+        "wires": [
+            [
+                "7c87305291b4a879"
+            ]
+        ]
+    },
+    {
+        "id": "7c87305291b4a879",
+        "type": "json",
+        "z": "1a41a0fc6727e1f3",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 370,
+        "y": 640,
+        "wires": [
+            [
+                "90dd8606e89751f1"
+            ]
+        ]
+    },
+    {
+        "id": "90dd8606e89751f1",
+        "type": "ui-text",
+        "z": "1a41a0fc6727e1f3",
+        "group": "5f3bd41f00bca8fe",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Alertas",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 500,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "6f06a81d6dd20f03",
+        "type": "ui-chart",
+        "z": "1a41a0fc6727e1f3",
+        "group": "b62df3ba7447cb41",
+        "name": "",
+        "label": "Radiação Histórica",
+        "order": 2,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "5",
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "2",
+        "height": "4",
+        "className": "",
+        "interpolation": "linear",
+        "x": 1070,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "48a4e451378eb207",
+        "type": "function",
+        "z": "1a41a0fc6727e1f3",
+        "name": "MET",
+        "func": "msg.payload = msg.payload.met;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 360,
+        "wires": [
+            [
+                "28cfd1d70753d3aa"
+            ]
+        ]
+    },
+    {
+        "id": "28cfd1d70753d3aa",
+        "type": "ui-text",
+        "z": "1a41a0fc6727e1f3",
+        "group": "791902eb6cc84244",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "MET:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 750,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "broker1",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 15,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "50fb4bd02ab2c112",
+        "type": "ui-group",
+        "name": "📡 Telemetria em Tempo Real",
+        "page": "94442e85eb01eaf0",
+        "width": "16",
+        "height": "4",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "b62df3ba7447cb41",
+        "type": "ui-group",
+        "name": "📈 Histórico de Telemetria",
+        "page": "94442e85eb01eaf0",
+        "width": "4",
+        "height": 1,
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "791902eb6cc84244",
+        "type": "ui-group",
+        "name": "🛰 Status da Missão",
+        "page": "94442e85eb01eaf0",
+        "width": "2",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "5f3bd41f00bca8fe",
+        "type": "ui-group",
+        "name": "⚠ Central de Alertas",
+        "page": "94442e85eb01eaf0",
+        "width": 6,
+        "height": 1,
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "94442e85eb01eaf0",
+        "type": "ui-page",
+        "name": "🚀 Dragon C214 Telemetry",
+        "ui": "ui_base",
+        "path": "/page2",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "b6d4ee869b90789b",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "ui_base",
+        "type": "ui-base",
+        "name": "CarePlus UI",
+        "path": "/dashboard",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-control",
+            "ui-notification"
+        ],
+        "headerContent": "page",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 5,
+        "showDisconnectNotification": true,
+        "allowInstall": true
+    },
+    {
+        "id": "b6d4ee869b90789b",
+        "type": "ui-theme",
+        "name": "Dragon",
+        "colors": {
+            "surface": "#3b82f6",
+            "primary": "#e5e7eb",
+            "bgPage": "#0b1020",
+            "groupBg": "#151c32",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "29e654e6967e72ba",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.30.2"
+        }
+    }
+]
