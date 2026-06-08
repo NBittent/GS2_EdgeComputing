@@ -144,7 +144,9 @@ https://wokwi.com/projects/466225684447476737
 
 ## 👥 Integrantes
 
-Adicionar os nomes dos integrantes do grupo.
+*Gabriel Cutrim (RM 568059)
+*Nicolas Bittencourt (RM 568108)
+*Pedro Chiarantano (RM 567396)
 
 ---
 
